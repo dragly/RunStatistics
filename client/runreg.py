@@ -6,7 +6,10 @@ import json
 import urllib2
 from os import getenv
 
-print argv[1:]
+# UPDATE THESE VARIABLES
+baseUrl = "http://compphys.dragly.org"
+# END UPDATE VARIABLES
+
 configDir = getenv("XDG_CONFIG_HOME", "$HOME/.config")
 
 config = ConfigParser.ConfigParser()
@@ -16,9 +19,9 @@ try:
 except ConfigParser.NoSectionError, ConfigParser.NoOptionError:
     project = "test"
 
-baseUrl = "http://compphys.dragly.org/wp-content/plugins/run-statistics/"
-registerUrl = baseUrl + "register-run.php?project=" + project
-updateUrl = baseUrl + "update-run.php"
+pluginUrl = baseUrl + "/wp-content/plugins/run-statistics/"
+registerUrl = pluginUrl + "register-run.php?project=" + project
+updateUrl = pluginUrl + "update-run.php"
 
 runData = json.load(urllib2.urlopen(registerUrl))
 runId = runData["runid"]
